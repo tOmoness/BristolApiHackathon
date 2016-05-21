@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BristolApiHackathon", "Bris
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BristolApiHackathon.ApiClient", "BristolApiHackathon.ApiClient\BristolApiHackathon.ApiClient.csproj", "{768962EF-53E7-407B-9DA9-F768EED2D3CB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BristolApiHackathon.Models", "BristolApiHackathon.Models\BristolApiHackathon.Models.csproj", "{085084B6-4862-49DA-B23B-E52AC947DB5D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{768962EF-53E7-407B-9DA9-F768EED2D3CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{768962EF-53E7-407B-9DA9-F768EED2D3CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{768962EF-53E7-407B-9DA9-F768EED2D3CB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{085084B6-4862-49DA-B23B-E52AC947DB5D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{085084B6-4862-49DA-B23B-E52AC947DB5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{085084B6-4862-49DA-B23B-E52AC947DB5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{085084B6-4862-49DA-B23B-E52AC947DB5D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
