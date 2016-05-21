@@ -27,7 +27,8 @@ namespace BristolApiHackathon
             {
                 //DepartureTime = DateTime.UtcNow.ToLongDateString(),
                 DepartureTime = "2016-05-21T14:40:00.000Z",
-                Origin = new Origin { Lat = 51.430098, Lng = -2.611623 },
+                //Origin = new Origin { Lat = 51.430098, Lng = -2.611623 },
+                Origin = new Origin { Lat = 51.421141, Lng = -2.628234 },
                 Destination = new Destination { Lat = 51.454730, Lng = -2.527380 },
                 AgencyId = "UK_TNDS_NOC_FSAV"
             });
@@ -63,7 +64,9 @@ namespace BristolApiHackathon
                     });
                 }
 
+                Console.WriteLine(new string('-', 20));
                 stops.ForEach(x => Console.WriteLine(x.Id));
+                Console.WriteLine(new string('-', 20));
 
 
                 var firstStop = new Stop();
@@ -86,7 +89,7 @@ namespace BristolApiHackathon
                     }
                 }
 
-                Console.WriteLine($"Best value for three stop hop: {firstStop.Id} to {lastStop.Id}.");
+                Console.WriteLine($"Best value for three stop hop: {firstStop.Id} to {lastStop.Id}. ({longestDistance:N2} miles)");
                 break;
             }
         }
