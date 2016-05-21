@@ -35,6 +35,8 @@ namespace BristolApiHackathon
             var response = client.Send(directionsRequest);
 
             ProcessResponse(response);
+
+            Console.ReadKey(true);
         }
 
         private static void ProcessResponse(ApiResponse response)
@@ -48,7 +50,7 @@ namespace BristolApiHackathon
                 var leg = legs[1] as Dictionary<string, object>;
 
                 var untypedStops = (leg["scheduledStopCalls"] as JsonArray);
-                
+
                 List<Stop> stops = new List<Stop>();
                 foreach (Dictionary<string, object> stop in untypedStops)
                 {
@@ -61,7 +63,31 @@ namespace BristolApiHackathon
                     });
                 }
 
+                stops.ForEach(x => Console.WriteLine(x.Id));
 
+
+                var firstStop = new Stop();
+                var lastStop = new Stop();
+                var longestDistance = 0.0;
+
+                for (int i = 0; i < stops.Count; i++)
+                {
+                    if (i + 3 >= stops.Count - 3)
+                        break;
+
+                    var lengthTest = GeoCodeCalc.CalcDistance(stops[i].Lat, stops[i].Long, stops[i + 3].Lat,
+                        stops[i + 3].Long);
+
+                    if (lengthTest > longestDistance)
+                    {
+                        longestDistance = lengthTest;
+                        firstStop = stops[i];
+                        lastStop = stops[i + 3];
+                    }
+                }
+
+                Console.WriteLine($"Best value for three stop hop: {firstStop.Id} to {lastStop.Id}.");
+                break;
             }
         }
 
