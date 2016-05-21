@@ -1,7 +1,14 @@
 ﻿namespace BristolApiHackathon.Models
 {
-    public class PlacePoints
+    public class TransitStop
     {
+        public string AdditionalCode { get; set; }
+        public string SmsCode { get; set; }
+        public int Bearing { get; set; }
+        public string DirectionName { get; set; }
+        public string StopIndicator { get; set; }
+        public bool IsClosed { get; set; }
+        public int StopMode { get; set; }
         public string ImportSource { get; set; }
         public string PrimaryCode { get; set; }
         public int PlacePointType { get; set; }
@@ -12,5 +19,6 @@
         public string Name { get; set; }
         public int Lat { get; set; }
         public int Lng { get; set; }
+        public string ParentPrimaryCode { get; set; }
     }
 }

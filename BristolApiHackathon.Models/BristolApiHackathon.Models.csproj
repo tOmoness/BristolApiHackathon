@@ -44,6 +44,11 @@
     <Compile Include="DirectionsResponse.cs" />
     <Compile Include="DirectionsResponseStatus.cs" />
     <Compile Include="Journey.cs" />
+    <Compile Include="TransitRouteInfo.cs" />
+    <Compile Include="TransitScheduledCall.cs" />
+    <Compile Include="TransitStop.cs" />
+    <Compile Include="TransitStopScheduledCall.cs" />
+    <Compile Include="TransitTripInfo.cs" />
     <Compile Include="PlacePoints.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TransitJourneyLeg.cs" />
