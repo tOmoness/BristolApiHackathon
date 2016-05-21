@@ -72,6 +72,13 @@ namespace BristolApiHackathon
                 var firstStop = new Stop();
                 var lastStop = new Stop();
                 var longestDistance = 0.0;
+                var totalDistance = 0.0;
+
+                for (int i = 0; i < stops.Count-1; i++)
+                {
+                    totalDistance += GeoCodeCalc.CalcDistance(stops[i].Lat, stops[i].Long, stops[i + 1].Lat,
+                        stops[i + 1].Long);
+                }
 
                 for (int i = 0; i < stops.Count; i++)
                 {
@@ -90,6 +97,7 @@ namespace BristolApiHackathon
                 }
 
                 Console.WriteLine($"Best value for three stop hop: {firstStop.Id} to {lastStop.Id}. ({longestDistance:N2} miles)");
+                Console.WriteLine($"Total journey distance: {totalDistance:N2} miles");
                 break;
             }
         }
