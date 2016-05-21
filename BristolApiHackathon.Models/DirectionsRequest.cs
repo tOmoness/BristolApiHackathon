@@ -16,5 +16,4 @@
         public bool EnableRealtimeResults { get; set; }
         public bool EnableFareResults { get; set; }
     }
-
 }

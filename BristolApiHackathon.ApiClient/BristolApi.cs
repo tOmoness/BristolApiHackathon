@@ -26,7 +26,7 @@ namespace BristolApiHackathon.ApiClient
 
         private IRestClient BuildClient() => new RestClient(ApiUrl);
 
-        public ApiResponse Send(IRestRequest request)
+        public ApiResponse Send(BristolApiRequest request)
         {
             request.AddHeader("X-Api-Key", _apiKey);
 
