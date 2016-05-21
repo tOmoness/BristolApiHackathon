@@ -64,6 +64,9 @@ namespace BristolApiHackathon
                     });
                 }
 
+                
+                Console.WriteLine($"Bus No: {(leg["linkedTransitRouteInfo"] as Dictionary<string, object>)["lineName"]} (" +
+                                  $"{(leg["linkedTransitTripInfo"] as Dictionary<string, object>)["headsign"]})");
                 Console.WriteLine(new string('-', 20));
                 stops.ForEach(x => Console.WriteLine(x.Id));
                 Console.WriteLine(new string('-', 20));
