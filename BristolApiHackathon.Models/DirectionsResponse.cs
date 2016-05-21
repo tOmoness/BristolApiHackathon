@@ -4,7 +4,7 @@ namespace BristolApiHackathon.Models
 {
     public class DirectionsResponse
     {
-        public string ResponseId { get; set; }
+        //public string ResponseId { get; set; }
         public DirectionsResponseStatus Status { get; set; }
         public IList<Journey> Journeys { get; set; }
         public IList<PlacePoints> PlacePoints { get; set; }

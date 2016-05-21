@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="BristolApi.cs" />
     <Compile Include="BristolApiRequest.cs" />
+    <Compile Include="GeoCodeCalc.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
