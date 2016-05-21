@@ -6,6 +6,6 @@ namespace BristolApiHackathon.Models
     {
         public bool? Success { get; set; }
         public string LocalizedErrorMessage { get; set; }
-        public IList<object> Data { get; set; }
+        public object Data { get; set; }
     }
 }
