@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BristolApiHackathon.Models;
 using RestSharp;
 using RestSharp.Authenticators;
 
@@ -29,7 +30,7 @@ namespace BristolApiHackathon.ApiClient
         {
             request.AddHeader("X-Api-Key", _apiKey);
 
-            return _client.Execute<ApiResponse>(request);
+            return _client.Execute<ApiResponse>(request).Data;
         }
     }
 }
