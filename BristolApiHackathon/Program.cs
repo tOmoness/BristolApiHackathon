@@ -108,17 +108,18 @@ namespace BristolApiHackathon
                         stops[i + 1].Long);
                 }
 
-                var secondWalkDistance = 0.0;
+                var lastWalkDistance = 0.0;
                 for (int i = lastStop.Index; i < stops.Count-1; i++)
                 {
-                    secondWalkDistance += GeoCodeCalc.CalcDistance(stops[i].Lat, stops[i].Long, stops[i + 1].Lat,
+                    lastWalkDistance += GeoCodeCalc.CalcDistance(stops[i].Lat, stops[i].Long, stops[i + 1].Lat,
                         stops[i + 1].Long);
                 }
 
-                Console.WriteLine($"Best value for three stop hop: {firstStop.Name} to {lastStop.Name}. ({longestDistance:N2} miles)");
+                Console.WriteLine($"Best value for three stop hop: {firstStop.Name} to {lastStop.Name}.");
+                Console.WriteLine($"Total walking distance: {longestDistance:N2} miles");
                 Console.WriteLine($"Total journey distance: {totalDistance:N2} miles");
                 Console.WriteLine($"First walk distance: {firstWalkDistance:N2} miles");
-                Console.WriteLine($"Second walk distance: {secondWalkDistance:N2} miles");
+                Console.WriteLine($"Last walk distance: {lastWalkDistance:N2} miles");
                 break;
             }
         }
