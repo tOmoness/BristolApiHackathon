@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using BristolApiHackathon.Models;
 using RestSharp;
 
 namespace BristolApiHackathon.ApiClient
@@ -10,6 +11,6 @@ namespace BristolApiHackathon.ApiClient
         }
 
         public static BristolApiRequest CreateDirectionsRequest(DirectionsRequest directionsRequest)
-            => new BristolApiRequest("/plan/directions", Method.POST).AddBody(directionsRequest);
+            => new BristolApiRequest("/plan/directions", Method.POST).AddBody(directionsRequest) as BristolApiRequest;
     }
 }
