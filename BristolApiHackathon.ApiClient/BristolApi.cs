@@ -17,7 +17,7 @@ namespace BristolApiHackathon.ApiClient
 
         public BristolApi(string apiKey)
         {
-            if (apiKey == null) throw new ArgumentNullException(nameof(apiKey));
+            if (string.IsNullOrWhiteSpace(apiKey)) throw new ArgumentNullException(nameof(apiKey));
             _apiKey = apiKey;
 
             _client = BuildClient();
