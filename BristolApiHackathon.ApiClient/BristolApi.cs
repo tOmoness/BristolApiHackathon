@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BristolApiHackathon.Models;
 using RestSharp;
 using RestSharp.Authenticators;
 
@@ -17,7 +18,7 @@ namespace BristolApiHackathon.ApiClient
 
         public BristolApi(string apiKey)
         {
-            if (apiKey == null) throw new ArgumentNullException(nameof(apiKey));
+            if (string.IsNullOrWhiteSpace(apiKey)) throw new ArgumentNullException(nameof(apiKey));
             _apiKey = apiKey;
 
             _client = BuildClient();
@@ -25,11 +26,11 @@ namespace BristolApiHackathon.ApiClient
 
         private IRestClient BuildClient() => new RestClient(ApiUrl);
 
-        public ApiResponse Send(IRestRequest request)
+        public ApiResponse Send(BristolApiRequest request)
         {
             request.AddHeader("X-Api-Key", _apiKey);
 
-            return _client.Execute<ApiResponse>(request);
+            return _client.Execute<ApiResponse>(request).Data;
         }
     }
 }

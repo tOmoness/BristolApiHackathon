@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Configuration;
+using BristolApiHackathon.ApiClient;
+using BristolApiHackathon.Models;
 
 namespace BristolApiHackathon
 {
@@ -10,6 +8,17 @@ namespace BristolApiHackathon
     {
         static void Main(string[] args)
         {
+            var apiKey = ConfigurationManager.AppSettings["ApiKey"];
+
+            var client = new ApiClient.BristolApi(apiKey);
+
+            var request = BristolApiRequest.CreateDirectionsRequest(new DirectionsRequest
+            {
+                Origin = new Origin(),
+                Destination = new Destination()
+            });
+
+            var response = client.Send(request);
         }
     }
 }
