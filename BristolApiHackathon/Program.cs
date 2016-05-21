@@ -53,33 +53,28 @@ namespace BristolApiHackathon
                 var untypedStops = (leg["scheduledStopCalls"] as JsonArray);
 
                 List<Stop> stops = new List<Stop>();
-                foreach (Dictionary<string, object> stop in untypedStops)
+                for (int i = 0; i < untypedStops.Count; i++)
                 {
+                    var stop = untypedStops[i] as Dictionary<string, object>;
                     var stopAsDick = stop["stop"] as Dictionary<string, object>;
                     stops.Add(new Stop
                     {
-                        Id = stopAsDick["name"].ToString(),
+                        Index = i,
+                        Name = stopAsDick["name"].ToString(),
                         Lat = double.Parse(stopAsDick["lat"].ToString()),
                         Long = double.Parse(stopAsDick["lng"].ToString())
                     });
                 }
 
                 Console.WriteLine(new string('-', 20));
-                stops.ForEach(x => Console.WriteLine(x.Id));
+                stops.ForEach(x => Console.WriteLine(x.Name));
                 Console.WriteLine(new string('-', 20));
 
 
                 var firstStop = new Stop();
                 var lastStop = new Stop();
                 var longestDistance = 0.0;
-                var totalDistance = 0.0;
-
-                for (int i = 0; i < stops.Count-1; i++)
-                {
-                    totalDistance += GeoCodeCalc.CalcDistance(stops[i].Lat, stops[i].Long, stops[i + 1].Lat,
-                        stops[i + 1].Long);
-                }
-
+                
                 for (int i = 0; i < stops.Count; i++)
                 {
                     if (i + 3 >= stops.Count - 3)
@@ -96,15 +91,39 @@ namespace BristolApiHackathon
                     }
                 }
 
-                Console.WriteLine($"Best value for three stop hop: {firstStop.Id} to {lastStop.Id}. ({longestDistance:N2} miles)");
+                var totalDistance = 0.0;
+                for (int i = 0; i < stops.Count - 1; i++)
+                {
+                    totalDistance += GeoCodeCalc.CalcDistance(stops[i].Lat, stops[i].Long, stops[i + 1].Lat,
+                        stops[i + 1].Long);
+                }
+
+                var firstWalkDistance = 0.0;
+                for (int i = 0; i < firstStop.Index; i++)
+                {
+                    firstWalkDistance += GeoCodeCalc.CalcDistance(stops[i].Lat, stops[i].Long, stops[i + 1].Lat,
+                        stops[i + 1].Long);
+                }
+
+                var secondWalkDistance = 0.0;
+                for (int i = lastStop.Index; i < stops.Count-1; i++)
+                {
+                    secondWalkDistance += GeoCodeCalc.CalcDistance(stops[i].Lat, stops[i].Long, stops[i + 1].Lat,
+                        stops[i + 1].Long);
+                }
+
+                Console.WriteLine($"Best value for three stop hop: {firstStop.Name} to {lastStop.Name}. ({longestDistance:N2} miles)");
                 Console.WriteLine($"Total journey distance: {totalDistance:N2} miles");
+                Console.WriteLine($"First walk distance: {firstWalkDistance:N2} miles");
+                Console.WriteLine($"Second walk distance: {secondWalkDistance:N2} miles");
                 break;
             }
         }
 
         private class Stop
         {
-            public string Id { get; set; }
+            public int Index { get; set; }
+            public string Name { get; set; }
             public double Lat { get; set; }
             public double Long { get; set; }
         }
