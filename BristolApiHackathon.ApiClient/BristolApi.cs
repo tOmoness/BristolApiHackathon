@@ -30,7 +30,9 @@ namespace BristolApiHackathon.ApiClient
         {
             request.AddHeader("X-Api-Key", _apiKey);
 
-            return _client.Execute<ApiResponse>(request).Data;
+            var response = _client.Execute<ApiResponse>(request);
+
+            return response.Data;
         }
     }
 }

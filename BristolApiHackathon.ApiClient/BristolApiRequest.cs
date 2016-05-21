@@ -11,6 +11,6 @@ namespace BristolApiHackathon.ApiClient
         }
 
         public static BristolApiRequest CreateDirectionsRequest(DirectionsRequest directionsRequest)
-            => new BristolApiRequest("/plan/directions", Method.POST).AddBody(directionsRequest) as BristolApiRequest;
+            => new BristolApiRequest("/plan/directions", Method.POST).AddJsonBody(directionsRequest) as BristolApiRequest;
     }
 }
