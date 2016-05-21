@@ -13,14 +13,18 @@ namespace BristolApiHackathon
 
             var client = new BristolApi(apiKey);
 
-            var request = BristolApiRequest.CreateDirectionsRequest(new DirectionsRequest
+            var agenciesRequest = BristolApiRequest.CreateAgenciesRequest();
+
+            var agencies = client.Send(agenciesRequest);
+
+            var directionsRequest = BristolApiRequest.CreateDirectionsRequest(new DirectionsRequest
             {
                 DepartureTime = DateTime.UtcNow.ToLongDateString(),
                 Origin = new Origin {Lat = 51.454730, Lng = -2.527380},
                 Destination = new Destination {Lat = 51.451357, Lng = -2.597563}
             });
 
-            var response = client.Send(request);
+            var response = client.Send(directionsRequest);
         }
     }
 }
