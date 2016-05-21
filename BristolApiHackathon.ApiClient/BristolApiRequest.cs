@@ -18,5 +18,7 @@ namespace BristolApiHackathon.ApiClient
                 new BristolApiRequest("/static/agencies", Method.GET).AddQueryParameter("agencyid", agencyId)
                     .AddQueryParameter("importsource", importSource) as BristolApiRequest;
         
+        public static BristolApiRequest CreateImportSourcesRequest()
+            => new BristolApiRequest("/static/importsources", Method.GET);
     }
 }

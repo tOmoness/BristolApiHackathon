@@ -13,6 +13,8 @@ namespace BristolApiHackathon
 
             var client = new BristolApi(apiKey);
 
+            var importSources = client.Send(BristolApiRequest.CreateImportSourcesRequest());
+
             var agenciesRequest = BristolApiRequest.CreateAgenciesRequest();
 
             var agencies = client.Send(agenciesRequest);
