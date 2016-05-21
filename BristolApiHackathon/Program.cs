@@ -1,7 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
+using System.Diagnostics;
+using System.Linq;
 using BristolApiHackathon.ApiClient;
 using BristolApiHackathon.Models;
+using RestSharp;
 
 namespace BristolApiHackathon
 {
@@ -29,6 +33,43 @@ namespace BristolApiHackathon
             });
 
             var response = client.Send(directionsRequest);
+
+            ProcessResponse(response);
+        }
+
+        private static void ProcessResponse(ApiResponse response)
+        {
+            var journeys = (response.Data as Dictionary<string, object>)["journeys"] as JsonArray;
+
+            foreach (Dictionary<string, object> journey in journeys)
+            {
+                var legs = journey["legs"] as JsonArray;
+
+                var leg = legs[1] as Dictionary<string, object>;
+
+                var untypedStops = (leg["scheduledStopCalls"] as JsonArray);
+                
+                List<Stop> stops = new List<Stop>();
+                foreach (Dictionary<string, object> stop in untypedStops)
+                {
+                    var stopAsDick = stop["stop"] as Dictionary<string, object>;
+                    stops.Add(new Stop
+                    {
+                        Id = stopAsDick["name"].ToString(),
+                        Lat = double.Parse(stopAsDick["lat"].ToString()),
+                        Long = double.Parse(stopAsDick["lng"].ToString())
+                    });
+                }
+
+
+            }
+        }
+
+        private class Stop
+        {
+            public string Id { get; set; }
+            public double Lat { get; set; }
+            public double Long { get; set; }
         }
     }
 }
