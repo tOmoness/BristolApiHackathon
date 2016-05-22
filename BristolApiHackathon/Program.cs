@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Diagnostics;
-using System.Linq;
 using BristolApiHackathon.ApiClient;
 using BristolApiHackathon.Models;
 using RestSharp;
@@ -25,9 +23,8 @@ namespace BristolApiHackathon
 
             var directionsRequest = BristolApiRequest.CreateDirectionsRequest(new DirectionsRequest
             {
-                //DepartureTime = DateTime.UtcNow.ToLongDateString(),
+
                 DepartureTime = "2016-05-21T14:40:00.000Z",
-                //Origin = new Origin { Lat = 51.430098, Lng = -2.611623 },
                 Origin = new Origin { Lat = 51.421141, Lng = -2.628234 },
                 Destination = new Destination { Lat = 51.454730, Lng = -2.527380 },
                 AgencyId = "UK_TNDS_NOC_FSAV"
@@ -76,52 +73,47 @@ namespace BristolApiHackathon
 
                 var firstStop = new Stop();
                 var lastStop = new Stop();
-                var longestDistance = 0.0;
+                var longestBusDistance = 0.0;
                 
                 for (int i = 0; i < stops.Count; i++)
                 {
                     if (i + 3 >= stops.Count - 3)
                         break;
 
-                    var lengthTest = GeoCodeCalc.CalcDistance(stops[i].Lat, stops[i].Long, stops[i + 3].Lat,
-                        stops[i + 3].Long);
+                    var lengthTest = CalculateDistanceAlongStops(stops.GetRange(i, 3));
 
-                    if (lengthTest > longestDistance)
+                    if (lengthTest > longestBusDistance)
                     {
-                        longestDistance = lengthTest;
+                        longestBusDistance = lengthTest;
                         firstStop = stops[i];
                         lastStop = stops[i + 3];
                     }
                 }
 
-                var totalDistance = 0.0;
-                for (int i = 0; i < stops.Count - 1; i++)
-                {
-                    totalDistance += GeoCodeCalc.CalcDistance(stops[i].Lat, stops[i].Long, stops[i + 1].Lat,
-                        stops[i + 1].Long);
-                }
-
-                var firstWalkDistance = 0.0;
-                for (int i = 0; i < firstStop.Index; i++)
-                {
-                    firstWalkDistance += GeoCodeCalc.CalcDistance(stops[i].Lat, stops[i].Long, stops[i + 1].Lat,
-                        stops[i + 1].Long);
-                }
-
-                var lastWalkDistance = 0.0;
-                for (int i = lastStop.Index; i < stops.Count-1; i++)
-                {
-                    lastWalkDistance += GeoCodeCalc.CalcDistance(stops[i].Lat, stops[i].Long, stops[i + 1].Lat,
-                        stops[i + 1].Long);
-                }
-
+                var totalDistance = CalculateDistanceAlongStops(stops);
+                
+                var firstWalkDistance = CalculateDistanceAlongStops(stops.GetRange(0, firstStop.Index + 1));
+                
+                var lastWalkDistance = CalculateDistanceAlongStops(stops.GetRange(lastStop.Index, stops.Count - lastStop.Index));
+                
                 Console.WriteLine($"Best value for three stop hop: {firstStop.Name} to {lastStop.Name}.");
-                Console.WriteLine($"Total walking distance: {longestDistance:N2} miles");
+                Console.WriteLine($"Total bus distance: {longestBusDistance:N2} miles");
                 Console.WriteLine($"Total journey distance: {totalDistance:N2} miles");
                 Console.WriteLine($"First walk distance: {firstWalkDistance:N2} miles");
                 Console.WriteLine($"Last walk distance: {lastWalkDistance:N2} miles");
                 break;
             }
+        }
+
+        private static double CalculateDistanceAlongStops(IList<Stop> stops)
+        {
+            var distance = 0.0;
+            for (int i = 0; i < stops.Count-1; i++)
+            {
+                distance += GeoCodeCalc.CalcDistance(stops[i].Lat, stops[i].Long, stops[i + 1].Lat,
+                        stops[i + 1].Long);
+            }
+            return distance;
         }
 
         private class Stop
