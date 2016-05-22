@@ -53,13 +53,13 @@ namespace BristolApiHackathon
                 for (int i = 0; i < untypedStops.Count; i++)
                 {
                     var stop = untypedStops[i] as Dictionary<string, object>;
-                    var stopAsDick = stop["stop"] as Dictionary<string, object>;
+                    var stopDictionary = stop["stop"] as Dictionary<string, object>;
                     stops.Add(new Stop
                     {
                         Index = i,
-                        Name = stopAsDick["name"].ToString(),
-                        Lat = double.Parse(stopAsDick["lat"].ToString()),
-                        Long = double.Parse(stopAsDick["lng"].ToString())
+                        Name = stopDictionary["name"].ToString(),
+                        Lat = double.Parse(stopDictionary["lat"].ToString()),
+                        Long = double.Parse(stopDictionary["lng"].ToString())
                     });
                 }
 
