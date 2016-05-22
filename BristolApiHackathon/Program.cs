@@ -15,11 +15,11 @@ namespace BristolApiHackathon
 
             var client = new BristolApi(apiKey);
 
-            var importSources = client.Send(BristolApiRequest.CreateImportSourcesRequest());
+            var importSources = client.Send<List<ImportSource>>(BristolApiRequest.CreateImportSourcesRequest());
 
-            var agenciesRequest = BristolApiRequest.CreateAgenciesRequest();
+            var agenciesRequest = BristolApiRequest.CreateAgenciesRequest(importSource:"TNDS");
 
-            var agencies = client.Send(agenciesRequest);
+            var agencies = client.Send<List<TransitAgency>>(agenciesRequest);
 
             var directionsRequest = BristolApiRequest.CreateDirectionsRequest(new DirectionsRequest
             {
@@ -30,9 +30,9 @@ namespace BristolApiHackathon
                 AgencyId = "UK_TNDS_NOC_FSAV"
             });
 
-            var response = client.Send(directionsRequest);
+            var response = client.Send<DirectionsResponse>(directionsRequest);
 
-            ProcessResponse(response);
+            //ProcessResponse(response);
 
             Console.ReadKey(true);
         }
@@ -62,14 +62,12 @@ namespace BristolApiHackathon
                         Long = double.Parse(stopDictionary["lng"].ToString())
                     });
                 }
-
                 
                 Console.WriteLine($"Bus No: {(leg["linkedTransitRouteInfo"] as Dictionary<string, object>)["lineName"]} (" +
                                   $"{(leg["linkedTransitTripInfo"] as Dictionary<string, object>)["headsign"]})");
                 Console.WriteLine(new string('-', 20));
                 stops.ForEach(x => Console.WriteLine(x.Name));
                 Console.WriteLine(new string('-', 20));
-
 
                 var firstStop = new Stop();
                 var lastStop = new Stop();

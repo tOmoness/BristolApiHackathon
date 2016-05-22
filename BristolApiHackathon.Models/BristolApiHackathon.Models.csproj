@@ -46,10 +46,12 @@
     <Compile Include="DirectionsRequest.cs" />
     <Compile Include="DirectionsResponse.cs" />
     <Compile Include="DirectionsResponseStatus.cs" />
+    <Compile Include="ImportSource.cs" />
     <Compile Include="Journey.cs" />
     <Compile Include="KeyValues.cs" />
     <Compile Include="Options.cs" />
     <Compile Include="Origin.cs" />
+    <Compile Include="TransitAgency.cs" />
     <Compile Include="TransitRouteInfo.cs" />
     <Compile Include="TransitScheduledCall.cs" />
     <Compile Include="TransitStop.cs" />

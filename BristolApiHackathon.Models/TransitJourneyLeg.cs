@@ -6,7 +6,7 @@ namespace BristolApiHackathon.Models
     {
         public TransitRouteInfo LinkedTransitRouteInfo { get; set; }
         public TransitTripInfo LinkedTreansitTripInfo { get; set; }
-        public IList<TransitStopScheduledCall> ScheduledStopCalls { get; set; }
+        public List<TransitStopScheduledCall> ScheduledStopCalls { get; set; }
         public string Type { get; set; }
         public string SummaryHtml { get; set; }
         public string OriginPlacePointId { get; set; }
