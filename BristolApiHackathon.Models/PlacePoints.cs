@@ -10,7 +10,7 @@
         public bool HasResourceStatus { get; set; }
         public string SubClassType { get; set; }
         public string Name { get; set; }
-        public int Lat { get; set; }
-        public int Lng { get; set; }
+        public double Lat { get; set; }
+        public double Lng { get; set; }
     }
 }

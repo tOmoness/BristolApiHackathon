@@ -9,7 +9,7 @@ namespace BristolApiHackathon.Models
         public int MaximumWalkingTimeBetweenLegs { get; set; }
         public int MaximumWalkingLegTime { get; set; }
         public int MaximumTotalWalkingTime { get; set; }
-        public IEnumerable<int> AcceptableVehicleTypes { get; set; }
+        public List<int> AcceptableVehicleTypes { get; set; }
         public int PlanningPrioritization { get; set; }
         public bool AccessibilityNoStairs { get; set; }
         public bool AccessibilityNoEscalators { get; set; }

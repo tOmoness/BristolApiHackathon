@@ -5,7 +5,7 @@ namespace BristolApiHackathon.Models
     public class TransitJourneyLeg
     {
         public TransitRouteInfo LinkedTransitRouteInfo { get; set; }
-        public TransitTripInfo LinkedTreansitTripInfo { get; set; }
+        public TransitTripInfo LinkedTransitTripInfo { get; set; }
         public List<TransitStopScheduledCall> ScheduledStopCalls { get; set; }
         public string Type { get; set; }
         public string SummaryHtml { get; set; }
