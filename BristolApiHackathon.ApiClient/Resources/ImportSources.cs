@@ -1,13 +1,17 @@
 ﻿using System.Collections.Generic;
 using BristolApiHackathon.Models;
+using RestSharp;
 
 namespace BristolApiHackathon.ApiClient.Resources
 {
-    public class ImportSources : IImportSources
+    public class ImportSources : BaseResource, IImportSources
     {
-        public IEnumerable<ImportSource> Get()
+        private const string Resource = "/static/importsources";
+
+        internal ImportSources(IRestClient client, IRequestBuilder requestBuilder) : base(Resource, client, requestBuilder)
         {
-            throw new System.NotImplementedException();
         }
+
+        public IEnumerable<ImportSource> Get() => Get<List<ImportSource>>().Data;
     }
 }

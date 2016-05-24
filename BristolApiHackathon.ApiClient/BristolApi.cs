@@ -1,6 +1,5 @@
 ﻿using System;
 using BristolApiHackathon.ApiClient.Endpoints;
-using BristolApiHackathon.Models;
 using RestSharp;
 
 namespace BristolApiHackathon.ApiClient
@@ -9,24 +8,25 @@ namespace BristolApiHackathon.ApiClient
     {
         private string ApiUrl => $"https://bristol.api.urbanthings.io/api/{ApiVersion}/";
         private const string ApiVersion = "2.0";
-        private readonly string _apiKey;
         private readonly IRestClient _client;
+        private readonly IRequestBuilder _requestBuilder;
 
         public BristolApi(string apiKey)
         {
             if (string.IsNullOrWhiteSpace(apiKey)) throw new ArgumentNullException(nameof(apiKey));
-            _apiKey = apiKey;
 
-            _client = BuildClient();
+            _client = new RestClient(ApiUrl);
+            _requestBuilder = new RequestBuilder(apiKey);
 
-            Static = new StaticApi(_client, _apiKey);
-            Planning = new PlanningApi(_client, _apiKey);
+            Static = new StaticApi(_client, _requestBuilder);
+            Planning = new PlanningApi(_client, _requestBuilder);
+            RealTime = new RealTimeApi(_client, _requestBuilder);
         }
-
-        private IRestClient BuildClient() => new RestClient(ApiUrl);
 
         public StaticApi Static { get; private set; }
 
         public PlanningApi Planning { get; private set; }
+
+        public RealTimeApi RealTime { get; private set; }
     }
 }

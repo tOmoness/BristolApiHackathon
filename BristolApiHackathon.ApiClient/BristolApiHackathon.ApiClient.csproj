@@ -45,8 +45,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BristolApi.cs" />
-    <Compile Include="BristolApiRequest.cs" />
     <Compile Include="Endpoints\RealTimeApi.cs" />
+    <Compile Include="IRequestBuilder.cs" />
+    <Compile Include="RequestBuilder.cs" />
+    <Compile Include="Resources\BaseResource.cs" />
     <Compile Include="Resources\Directions.cs" />
     <Compile Include="Resources\Agencies.cs" />
     <Compile Include="Resources\IAgencies.cs" />

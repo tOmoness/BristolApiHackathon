@@ -1,12 +1,21 @@
 using BristolApiHackathon.Models;
+using RestSharp;
 
 namespace BristolApiHackathon.ApiClient.Resources
 {
-    public class Directions : IDirections
+    public class Directions : BaseResource, IDirections
     {
-        public DirectionsResponse Get(DirectionsRequest directionsRequest)
+        private const string Resource = "/plan/directions";
+
+        internal Directions(IRestClient _client, IRequestBuilder _requestBuilder) : base(Resource, _client, _requestBuilder)
         {
-            throw new System.NotImplementedException();
         }
+
+        public DirectionsResponse Post(DirectionsRequest directionsRequest) => Post<DirectionsResponse>(request =>
+        {
+            request.AddJsonBody(directionsRequest);
+
+            return request;
+        }).Data;
     }
 }

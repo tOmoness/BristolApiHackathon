@@ -6,16 +6,13 @@ namespace BristolApiHackathon.ApiClient.Endpoints
 {
     public class StaticApi
     {
-        private readonly IRestClient _client;
-        private readonly string _apiKey;
-
-        public StaticApi(IRestClient client, string apiKey)
+        internal StaticApi(IRestClient client, IRequestBuilder requestBuilder)
         {
             if (client == null) throw new ArgumentNullException(nameof(client));
-            if (string.IsNullOrWhiteSpace(apiKey)) throw new ArgumentNullException(nameof(apiKey));
+            if (requestBuilder == null) throw new ArgumentNullException(nameof(requestBuilder));
 
-            _client = client;
-            _apiKey = apiKey;
+            Agencies = new Agencies(client, requestBuilder);
+            ImportSources = new ImportSources(client, requestBuilder);
         }
 
         public IImportSources ImportSources { get; private set; }

@@ -7,17 +7,19 @@ namespace BristolApiHackathon.ApiClient.Endpoints
     public class PlanningApi
     {
         private readonly IRestClient _client;
-        private readonly string _apiKey;
+        private readonly IRequestBuilder _requestBuilder;
 
-        public PlanningApi(IRestClient client, string apiKey)
+        internal PlanningApi(IRestClient client, IRequestBuilder requestBuilder)
         {
             if (client == null) throw new ArgumentNullException(nameof(_client));
-            if (string.IsNullOrWhiteSpace(apiKey)) throw new ArgumentNullException(nameof(apiKey));
+            if (requestBuilder == null) throw new ArgumentNullException(nameof(requestBuilder));
 
             _client = client;
-            _apiKey = apiKey;
+            _requestBuilder = requestBuilder;
+
+            Directions = new Directions(_client, _requestBuilder);
         }
 
-        public Directions Directions { get; set; }
+        public IDirections Directions { get; set; }
     }
 }

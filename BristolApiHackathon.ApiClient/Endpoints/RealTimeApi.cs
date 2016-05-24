@@ -6,15 +6,15 @@ namespace BristolApiHackathon.ApiClient.Endpoints
     public class RealTimeApi
     {
         private readonly IRestClient _client;
-        private readonly string _apiKey;
+        private readonly IRequestBuilder _requestBuilder;
 
-        public RealTimeApi(IRestClient client, string apiKey)
+        internal RealTimeApi(IRestClient client, IRequestBuilder requestBuilder)
         {
-            if (client == null) throw new ArgumentNullException(nameof(_client));
-            if (string.IsNullOrWhiteSpace(apiKey)) throw new ArgumentNullException(nameof(apiKey));
+            if (client == null) throw new ArgumentNullException(nameof(client));
+            if (requestBuilder == null) throw new ArgumentNullException(nameof(requestBuilder));
 
             _client = client;
-            _apiKey = apiKey;
+            _requestBuilder = requestBuilder;
         }
     }
 }

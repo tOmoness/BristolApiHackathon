@@ -20,9 +20,8 @@ namespace BristolApiHackathon
 
             //var agencies = client.Static.Agencies.Get(null, "TNDS");
 
-            var response = client.Planning.Directions.Get(new DirectionsRequest
+            var response = client.Planning.Directions.Post(new DirectionsRequest
             {
-
                 DepartureTime = "2016-05-21T14:40:00.000Z",
                 Origin = new Origin { Lat = 51.421141, Lng = -2.628234 },
                 Destination = new Destination { Lat = 51.454730, Lng = -2.527380 },
