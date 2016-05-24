@@ -1,5 +1,6 @@
 using BristolApiHackathon.Models;
 using RestSharp;
+using System;
 
 namespace BristolApiHackathon.ApiClient.Resources
 {
@@ -13,6 +14,8 @@ namespace BristolApiHackathon.ApiClient.Resources
 
         public DirectionsResponse Post(DirectionsRequest directionsRequest) => Post<DirectionsResponse>(request =>
         {
+            if (directionsRequest == null) throw new ArgumentNullException(nameof(directionsRequest));
+
             request.AddJsonBody(directionsRequest);
 
             return request;
