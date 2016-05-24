@@ -46,8 +46,29 @@
   <ItemGroup>
     <Compile Include="BristolApi.cs" />
     <Compile Include="BristolApiRequest.cs" />
+    <Compile Include="Endpoints\RealTimeApi.cs" />
+    <Compile Include="Resources\Directions.cs" />
+    <Compile Include="Resources\Agencies.cs" />
+    <Compile Include="Resources\IAgencies.cs" />
+    <Compile Include="Resources\IDirections.cs" />
+    <Compile Include="Resources\IPlaces.cs" />
+    <Compile Include="Resources\IRoutesInfo.cs" />
+    <Compile Include="Resources\IStopCalls.cs" />
+    <Compile Include="Resources\ITripGroups.cs" />
+    <Compile Include="Resources\ITrips.cs" />
+    <Compile Include="Resources\IPlacePoints.cs" />
     <Compile Include="GeoCodeCalc.cs" />
+    <Compile Include="Resources\IImportSources.cs" />
+    <Compile Include="Resources\ImportSources.cs" />
+    <Compile Include="Resources\ITransitStops.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Endpoints\PlanningApi.cs" />
+    <Compile Include="Endpoints\StaticApi.cs" />
+    <Compile Include="Resources\PlacePoints.cs" />
+    <Compile Include="Resources\Places.cs" />
+    <Compile Include="Resources\RoutesInfo.cs" />
+    <Compile Include="Resources\TransitStops.cs" />
+    <Compile Include="Resources\Trips.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

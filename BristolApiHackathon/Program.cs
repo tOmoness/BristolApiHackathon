@@ -16,13 +16,11 @@ namespace BristolApiHackathon
 
             var client = new BristolApi(apiKey);
 
-            //var importSources = client.Send<List<ImportSource>>(BristolApiRequest.CreateImportSourcesRequest());
+            //var importSources = client.Static.ImportSources.Get();
 
-            var agenciesRequest = BristolApiRequest.CreateAgenciesRequest(importSource: "TNDS");
+            //var agencies = client.Static.Agencies.Get(null, "TNDS");
 
-            //var agencies = client.Send<List<TransitAgency>>(agenciesRequest);
-
-            var directionsRequest = BristolApiRequest.CreateDirectionsRequest(new DirectionsRequest
+            var response = client.Planning.Directions.Get(new DirectionsRequest
             {
 
                 DepartureTime = "2016-05-21T14:40:00.000Z",
@@ -31,9 +29,7 @@ namespace BristolApiHackathon
                 AgencyId = "UK_TNDS_NOC_FSAV"
             });
 
-            var response = client.Send<DirectionsResponse>(directionsRequest);
-
-            ProcessResponse(response.Data);
+            ProcessResponse(response);
 
             Console.ReadKey(true);
         }

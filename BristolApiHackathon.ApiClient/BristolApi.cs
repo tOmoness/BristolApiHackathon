@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using BristolApiHackathon.ApiClient.Endpoints;
 using BristolApiHackathon.Models;
 using RestSharp;
-using RestSharp.Authenticators;
 
 namespace BristolApiHackathon.ApiClient
 {
@@ -22,26 +18,15 @@ namespace BristolApiHackathon.ApiClient
             _apiKey = apiKey;
 
             _client = BuildClient();
+
+            Static = new StaticApi(_client, _apiKey);
+            Planning = new PlanningApi(_client, _apiKey);
         }
 
         private IRestClient BuildClient() => new RestClient(ApiUrl);
 
-        public ApiResponse Send(BristolApiRequest request)
-        {
-            request.AddHeader("X-Api-Key", _apiKey);
+        public StaticApi Static { get; private set; }
 
-            var response = _client.Execute<ApiResponse>(request);
-
-            return response.Data;
-        }
-
-        public ApiResponse<T> Send<T>(BristolApiRequest request)
-        {
-            request.AddHeader("X-Api-Key", _apiKey);
-
-            var response = _client.Execute<ApiResponse<T>>(request);
-
-            return response.Data;
-        }
+        public PlanningApi Planning { get; private set; }
     }
 }
